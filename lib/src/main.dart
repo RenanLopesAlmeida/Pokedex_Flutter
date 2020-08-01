@@ -21,6 +21,18 @@ class MyApp extends StatelessWidget {
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),
+              headline5: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+              subtitle2: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
       ),
     );

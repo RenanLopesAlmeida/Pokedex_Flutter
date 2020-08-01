@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_pokedex/src/consts/consts_api.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 import 'package:flutter_pokedex/stores/pokeapi_store.dart';
@@ -80,10 +81,11 @@ class _HomePageState extends State<HomePage> {
                                       child: GestureDetector(
                                         child: PokeItem(
                                           index: index,
+                                          types: _pokemon.type,
                                           name: _pokemon.name,
-                                          color: Colors.redAccent,
-                                          image: _pokeApiStore.getImage(
-                                              pokemonNumber: _pokemon.num),
+                                          color: ConstsAPI.getColorType(
+                                              type: _pokemon.type[0]),
+                                          num: _pokemon.num,
                                         ),
                                         onTap: () {
                                           // _pokemonStore.setPokemonAtual(

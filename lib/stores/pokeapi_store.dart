@@ -24,6 +24,24 @@ abstract class _PokeApiStoreBase with Store {
   }
 
   @action
+  Widget getImage({String pokemonNumber}) {
+    return CachedNetworkImage(
+      placeholder: (context, url) => Center(
+        child: CircularProgressIndicator(
+          backgroundColor: Colors.grey,
+          strokeWidth: 1.8,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            Colors.deepPurpleAccent,
+          ),
+        ),
+      ),
+      alignment: Alignment.bottomRight,
+      imageUrl:
+          'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$pokemonNumber.png',
+    );
+  }
+
+  @action
   fetchPokemonList() {
     _pokeAPI = null;
 
@@ -42,21 +60,5 @@ abstract class _PokeApiStoreBase with Store {
       print('Erro ao carregar lista ${stacktrace.toString()}');
       return null;
     }
-  }
-
-  Widget getImage({String pokemonNumber}) {
-    return CachedNetworkImage(
-      placeholder: (context, url) => Center(
-        child: CircularProgressIndicator(
-          backgroundColor: Colors.grey,
-          strokeWidth: 1.8,
-          valueColor: AlwaysStoppedAnimation<Color>(
-            Colors.deepPurpleAccent,
-          ),
-        ),
-      ),
-      imageUrl:
-          'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$pokemonNumber.png',
-    );
   }
 }
