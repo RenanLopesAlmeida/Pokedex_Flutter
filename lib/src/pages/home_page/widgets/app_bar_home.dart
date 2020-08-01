@@ -13,7 +13,9 @@ class AppBarHome extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 20, right: 5),
                 child: IconButton(
-                  icon: Icon(Icons.menu),
+                  icon: Icon(
+                    Icons.menu,
+                  ),
                   onPressed: () {},
                 ),
               )
