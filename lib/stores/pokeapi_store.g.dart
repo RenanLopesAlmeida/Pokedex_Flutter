@@ -16,6 +16,13 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
       (_$pokeApiComputed ??= Computed<PokeApi>(() => super.pokeApi,
               name: '_PokeApiStoreBase.pokeApi'))
           .value;
+  Computed<Pokemon> _$currentPokemonComputed;
+
+  @override
+  Pokemon get currentPokemon => (_$currentPokemonComputed ??= Computed<Pokemon>(
+          () => super.currentPokemon,
+          name: '_PokeApiStoreBase.currentPokemon'))
+      .value;
 
   final _$_pokeAPIAtom = Atom(name: '_PokeApiStoreBase._pokeAPI');
 
@@ -32,6 +39,21 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     });
   }
 
+  final _$_currentPokemonAtom = Atom(name: '_PokeApiStoreBase._currentPokemon');
+
+  @override
+  Pokemon get _currentPokemon {
+    _$_currentPokemonAtom.reportRead();
+    return super._currentPokemon;
+  }
+
+  @override
+  set _currentPokemon(Pokemon value) {
+    _$_currentPokemonAtom.reportWrite(value, super._currentPokemon, () {
+      super._currentPokemon = value;
+    });
+  }
+
   final _$_PokeApiStoreBaseActionController =
       ActionController(name: '_PokeApiStoreBase');
 
@@ -41,6 +63,28 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
         name: '_PokeApiStoreBase.getPokemon');
     try {
       return super.getPokemon(index: index);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setCurrentPokemon(int index) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
+        name: '_PokeApiStoreBase.setCurrentPokemon');
+    try {
+      return super.setCurrentPokemon(index);
+    } finally {
+      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  Widget getImage({String pokemonNumber}) {
+    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
+        name: '_PokeApiStoreBase.getImage');
+    try {
+      return super.getImage(pokemonNumber: pokemonNumber);
     } finally {
       _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -60,7 +104,8 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   @override
   String toString() {
     return '''
-pokeApi: ${pokeApi}
+pokeApi: ${pokeApi},
+currentPokemon: ${currentPokemon}
     ''';
   }
 }

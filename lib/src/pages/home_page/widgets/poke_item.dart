@@ -56,7 +56,6 @@ class PokeItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Stack(
-            //alignment: Alignment.bottomRight,
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.only(top: 8, left: 8),

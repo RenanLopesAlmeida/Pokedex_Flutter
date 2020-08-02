@@ -6,27 +6,18 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_pokedex/stores/pokeapi_store.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
 import 'package:flutter_pokedex/src/pages/home_page/widgets/poke_item.dart';
+import 'package:provider/provider.dart';
 import './widgets/app_bar_home.dart';
 import '../../consts/consts_app.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  PokeApiStore _pokeApiStore = PokeApiStore();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _pokeApiStore = PokeApiStore();
-    _pokeApiStore.fetchPokemonList();
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _pokeApiStore = Provider.of<PokeApiStore>(context);
+    if (_pokeApiStore.pokeApi == null) {
+      _pokeApiStore.fetchPokemonList();
+    }
+
     double _screenWidth = MediaQuery.of(context).size.width;
     double _statusbarHeight = MediaQuery.of(context).padding.top;
 
@@ -57,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: Container(
                     child: Observer(builder: (_) {
-                      PokeApi _pokeApi = this._pokeApiStore.pokeApi;
+                      PokeApi _pokeApi = _pokeApiStore.pokeApi;
                       return (_pokeApi != null)
                           ? AnimationLimiter(
                               child: GridView.builder(
@@ -70,9 +61,8 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 itemCount: _pokeApi.pokemon.length,
                                 itemBuilder: (context, index) {
-                                  Pokemon _pokemon = this
-                                      ._pokeApiStore
-                                      .getPokemon(index: index);
+                                  Pokemon _pokemon =
+                                      _pokeApiStore.getPokemon(index: index);
                                   return AnimationConfiguration.staggeredGrid(
                                     position: index,
                                     duration: const Duration(milliseconds: 375),
@@ -88,19 +78,13 @@ class _HomePageState extends State<HomePage> {
                                           num: _pokemon.num,
                                         ),
                                         onTap: () {
-                                          // _pokemonStore.setPokemonAtual(
-                                          //     index: index);
-                                          // Navigator.push(
-                                          //   context,
-                                          //   MaterialPageRoute(
-                                          //     builder:
-                                          //         (BuildContext context) =>
-                                          //             PokeDetailPage(
-                                          //       index: index,
-                                          //     ),
-                                          //     fullscreenDialog: true,
-                                          //   ),
-                                          // );
+                                          _pokeApiStore
+                                              .setCurrentPokemon(index);
+                                          Navigator.pushNamed(
+                                            context,
+                                            'poke_detail_page',
+                                            arguments: index,
+                                          );
                                         },
                                       ),
                                     ),
