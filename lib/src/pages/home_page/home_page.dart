@@ -6,18 +6,29 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_pokedex/stores/pokeapi_store.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
 import 'package:flutter_pokedex/src/pages/home_page/widgets/poke_item.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 import './widgets/app_bar_home.dart';
 import '../../consts/consts_app.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    final _pokeApiStore = Provider.of<PokeApiStore>(context);
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  PokeApiStore _pokeApiStore;
+  @override
+  void initState() {
+    super.initState();
+    _pokeApiStore = GetIt.instance<PokeApiStore>();
+
     if (_pokeApiStore.pokeApi == null) {
       _pokeApiStore.fetchPokemonList();
     }
+  }
 
+  @override
+  Widget build(BuildContext context) {
     double _screenWidth = MediaQuery.of(context).size.width;
     double _statusbarHeight = MediaQuery.of(context).padding.top;
 

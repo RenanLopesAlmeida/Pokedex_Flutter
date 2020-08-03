@@ -18,20 +18,32 @@ abstract class _PokeApiStoreBase with Store {
   @observable
   Pokemon _currentPokemon;
 
+  @observable
+  Color _currentPokemonColor;
+
+  @observable
+  int currentPosition;
+
   @computed
   PokeApi get pokeApi => _pokeAPI;
 
   @computed
   Pokemon get currentPokemon => _currentPokemon;
 
-  @action
-  getPokemon({int index}) {
+  @computed
+  Color get currentPokemonColor => _currentPokemonColor;
+
+  Pokemon getPokemon({int index}) {
     return _pokeAPI.pokemon[index];
   }
 
   @action
   setCurrentPokemon(int index) {
     _currentPokemon = _pokeAPI.pokemon[index];
+    _currentPokemonColor = ConstsAPI.getColorType(
+      type: _currentPokemon.type[0],
+    );
+    currentPosition = index;
   }
 
   @action

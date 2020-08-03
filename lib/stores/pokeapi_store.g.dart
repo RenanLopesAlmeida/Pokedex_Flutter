@@ -23,6 +23,13 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
           () => super.currentPokemon,
           name: '_PokeApiStoreBase.currentPokemon'))
       .value;
+  Computed<Color> _$currentPokemonColorComputed;
+
+  @override
+  Color get currentPokemonColor => (_$currentPokemonColorComputed ??=
+          Computed<Color>(() => super.currentPokemonColor,
+              name: '_PokeApiStoreBase.currentPokemonColor'))
+      .value;
 
   final _$_pokeAPIAtom = Atom(name: '_PokeApiStoreBase._pokeAPI');
 
@@ -54,19 +61,40 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
     });
   }
 
-  final _$_PokeApiStoreBaseActionController =
-      ActionController(name: '_PokeApiStoreBase');
+  final _$_currentPokemonColorAtom =
+      Atom(name: '_PokeApiStoreBase._currentPokemonColor');
 
   @override
-  dynamic getPokemon({int index}) {
-    final _$actionInfo = _$_PokeApiStoreBaseActionController.startAction(
-        name: '_PokeApiStoreBase.getPokemon');
-    try {
-      return super.getPokemon(index: index);
-    } finally {
-      _$_PokeApiStoreBaseActionController.endAction(_$actionInfo);
-    }
+  Color get _currentPokemonColor {
+    _$_currentPokemonColorAtom.reportRead();
+    return super._currentPokemonColor;
   }
+
+  @override
+  set _currentPokemonColor(Color value) {
+    _$_currentPokemonColorAtom.reportWrite(value, super._currentPokemonColor,
+        () {
+      super._currentPokemonColor = value;
+    });
+  }
+
+  final _$currentPositionAtom = Atom(name: '_PokeApiStoreBase.currentPosition');
+
+  @override
+  int get currentPosition {
+    _$currentPositionAtom.reportRead();
+    return super.currentPosition;
+  }
+
+  @override
+  set currentPosition(int value) {
+    _$currentPositionAtom.reportWrite(value, super.currentPosition, () {
+      super.currentPosition = value;
+    });
+  }
+
+  final _$_PokeApiStoreBaseActionController =
+      ActionController(name: '_PokeApiStoreBase');
 
   @override
   dynamic setCurrentPokemon(int index) {
@@ -104,8 +132,10 @@ mixin _$PokeApiStore on _PokeApiStoreBase, Store {
   @override
   String toString() {
     return '''
+currentPosition: ${currentPosition},
 pokeApi: ${pokeApi},
-currentPokemon: ${currentPokemon}
+currentPokemon: ${currentPokemon},
+currentPokemonColor: ${currentPokemonColor}
     ''';
   }
 }
