@@ -71,10 +71,10 @@ class PokeItem extends StatelessWidget {
                 ),
                 child: _setTypes(context),
               ),
-              Hero(
-                tag: index.toString(),
-                child: Align(
-                  alignment: Alignment.bottomRight,
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Hero(
+                  tag: '$name rotation',
                   child: Opacity(
                     opacity: 0.4,
                     child: Image.asset(
@@ -87,21 +87,24 @@ class PokeItem extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: CachedNetworkImage(
-                  alignment: Alignment.bottomRight,
-                  height: 90,
-                  width: 90,
-                  placeholder: (context, url) => Center(
-                    child: CircularProgressIndicator(
-                      backgroundColor: Colors.grey,
-                      strokeWidth: 1.8,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.deepPurpleAccent,
+                child: Hero(
+                  tag: name,
+                  child: CachedNetworkImage(
+                    alignment: Alignment.bottomRight,
+                    height: 90,
+                    width: 90,
+                    placeholder: (context, url) => Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.grey,
+                        strokeWidth: 1.8,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          Colors.deepPurpleAccent,
+                        ),
                       ),
                     ),
+                    imageUrl:
+                        'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png',
                   ),
-                  imageUrl:
-                      'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/$num.png',
                 ),
               ),
             ],
