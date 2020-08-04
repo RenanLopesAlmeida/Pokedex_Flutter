@@ -5,7 +5,7 @@ import 'package:flutter_pokedex/src/models/pokeapi.dart';
 import 'package:flutter_pokedex/src/pages/about_page/about_page.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/poke_animated_widget.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/pokeball_animated_rotation.dart';
-import 'package:flutter_pokedex/stores/pokeapi_store.dart';
+import '../../stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:simple_animations/simple_animations/multi_track_tween.dart';
@@ -33,10 +33,15 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
     _pokemonStore = GetIt.instance<PokeApiStore>();
     _pokemon = _pokemonStore.currentPokemon;
 
-    _animation = MultiTrackTween([
-      Track("rotation").add(Duration(seconds: 5), Tween(begin: 0.0, end: 10.0),
-          curve: Curves.linear),
-    ]);
+    _animation = MultiTrackTween(
+      [
+        Track("rotation").add(
+          Duration(seconds: 100),
+          Tween(begin: 0.0, end: 100.0),
+          curve: Curves.linear,
+        ),
+      ],
+    );
 
     _progress = 0;
     _multiple = 1;

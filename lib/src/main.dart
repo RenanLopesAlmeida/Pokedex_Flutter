@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/poke_detail_page.dart';
-import 'package:flutter_pokedex/stores/pokeapi_store.dart';
+import './stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import './pages/home_page/home_page.dart';
 

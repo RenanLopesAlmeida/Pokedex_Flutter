@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/consts/consts_app.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
-import 'package:flutter_pokedex/stores/pokeapi_store.dart';
+import '../../../stores/pokeapi_store.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class PokeballAnimatedRotation extends StatelessWidget {
@@ -24,7 +24,7 @@ class PokeballAnimatedRotation extends StatelessWidget {
       playback: Playback.LOOP,
       duration: animation.duration,
       tween: animation,
-      curve: Curves.easeInOutSine,
+      curve: Curves.linear,
       builder: (context, anim) {
         return Observer(
           builder: (ctx) {

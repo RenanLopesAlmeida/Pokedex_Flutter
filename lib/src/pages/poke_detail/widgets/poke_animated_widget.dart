@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
-import 'package:flutter_pokedex/stores/pokeapi_store.dart';
+import '../../../stores/pokeapi_store.dart';
 
 class PokeAnimatedWidget extends StatelessWidget {
   final int index;

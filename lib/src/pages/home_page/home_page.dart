@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/consts/consts_api.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:simple_animations/simple_animations.dart';
 
-import 'package:flutter_pokedex/stores/pokeapi_store.dart';
+import '../../stores/pokeapi_store.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
 import 'package:flutter_pokedex/src/pages/home_page/widgets/poke_item.dart';
 import 'package:get_it/get_it.dart';
@@ -17,6 +18,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   PokeApiStore _pokeApiStore;
+  MultiTrackTween _animation;
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +28,12 @@ class _HomePageState extends State<HomePage> {
     if (_pokeApiStore.pokeApi == null) {
       _pokeApiStore.fetchPokemonList();
     }
+
+    _animation = MultiTrackTween([
+      Track("rotation").add(
+          Duration(seconds: 100), Tween(begin: 20.0, end: 80.0),
+          curve: Curves.linear),
+    ]);
   }
 
   @override
@@ -42,10 +51,24 @@ class _HomePageState extends State<HomePage> {
             left: _screenWidth - (240 / 1.6),
             child: Opacity(
               opacity: 0.1,
-              child: Image.asset(
-                ConstsApp.darkPokeball,
-                height: 240,
-                width: 240,
+              child: ControlledAnimation(
+                playback: Playback.LOOP,
+                duration: _animation.duration,
+                tween: _animation,
+                curve: Curves.linear,
+                builder: (context, anim) {
+                  return Transform.rotate(
+                    angle: anim['rotation'],
+                    child: Hero(
+                      tag: 'pokeball_header',
+                      child: Image.asset(
+                        ConstsApp.darkPokeball,
+                        height: 240,
+                        width: 240,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
