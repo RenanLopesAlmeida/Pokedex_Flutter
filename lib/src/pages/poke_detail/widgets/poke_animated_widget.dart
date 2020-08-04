@@ -22,7 +22,9 @@ class PokeAnimatedWidget extends StatelessWidget {
             (index == pokemonStore.currentPosition) ? 0 : 60,
           ),
           child: Hero(
-            tag: pokemonItem.name,
+            tag: (index == pokemonStore.currentPosition)
+                ? pokemonItem.name
+                : 'none' + index.toString(),
             child: CachedNetworkImage(
               height: 160,
               width: 160,

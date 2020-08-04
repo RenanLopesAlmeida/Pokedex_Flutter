@@ -48,7 +48,14 @@ class PokeItem extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: color,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              color,
+              color.withOpacity(0.2),
+            ],
+          ),
           borderRadius: BorderRadius.all(
             Radius.circular(25),
           ),

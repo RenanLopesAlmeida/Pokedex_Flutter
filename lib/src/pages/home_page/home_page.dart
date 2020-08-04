@@ -38,10 +38,10 @@ class _HomePageState extends State<HomePage> {
         alignment: Alignment.topCenter,
         children: <Widget>[
           Positioned(
-            top: (-240 / 4.7),
+            top: MediaQuery.of(context).padding.top - 240 / 3.1,
             left: _screenWidth - (240 / 1.6),
             child: Opacity(
-              opacity: 0.06,
+              opacity: 0.1,
               child: Image.asset(
                 ConstsApp.darkPokeball,
                 height: 240,

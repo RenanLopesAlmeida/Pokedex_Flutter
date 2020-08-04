@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Pokedex',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        brightness: Brightness.dark,
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: ThemeData.light().textTheme.copyWith(
