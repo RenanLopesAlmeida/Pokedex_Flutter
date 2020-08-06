@@ -1,0 +1,14 @@
+import 'package:mobx/mobx.dart';
+part 'app_store.g.dart';
+
+class AppStore = _AppStoreBase with _$AppStore;
+
+abstract class _AppStoreBase with Store {
+  @observable
+  bool darkMode = false;
+
+  bool getCurrentTheme() {
+    darkMode = !darkMode;
+    return darkMode;
+  }
+}
