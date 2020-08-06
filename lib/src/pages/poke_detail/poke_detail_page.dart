@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/consts/consts_app.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
 import 'package:flutter_pokedex/src/pages/info_page/info_page.dart';
+import 'package:flutter_pokedex/src/pages/poke_detail/widgets/appbar_widget.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/poke_animated_widget.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/pokeball_animated_rotation.dart';
 import 'package:flutter_pokedex/src/stores/pokeapi_v2_store.dart';
@@ -96,40 +97,9 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
                 ),
                 child: Stack(
                   children: <Widget>[
-                    AppBar(
-                      backgroundColor: Colors.transparent,
-                      elevation: 0,
-                      actions: <Widget>[
-                        Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            ControlledAnimation(
-                              playback: Playback.LOOP,
-                              duration: _animation.duration,
-                              tween: _animation,
-                              //curve: Curves.easeInOutSine,
-                              builder: (context, anim) {
-                                return Transform.rotate(
-                                  angle: anim['rotation'],
-                                  child: Opacity(
-                                    opacity:
-                                        (_opacityTitleAppBar >= 0.2) ? 0.2 : 0,
-                                    child: Image.asset(
-                                      ConstsApp.whitePokeball,
-                                      height: 60,
-                                      width: 60,
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.favorite_border),
-                              onPressed: () {},
-                            )
-                          ],
-                        ),
-                      ],
+                    AppbarWidget(
+                      animation: _animation,
+                      opacityTitleAppBar: _opacityTitleAppBar,
                     ),
                     Stack(
                       alignment: Alignment.centerLeft,

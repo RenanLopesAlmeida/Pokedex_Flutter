@@ -36,10 +36,13 @@ class _AppBarHomeState extends State<AppBarHome> {
                 Container(
                   padding: const EdgeInsets.only(top: 20, right: 6),
                   child: IconButton(
-                    icon: Image.asset(
-                      (_darkTheme)
-                          ? ConstsApp.whitePokeball
-                          : ConstsApp.darkPokeball,
+                    icon: Opacity(
+                      opacity: 0.9,
+                      child: Image.asset(
+                        (_darkTheme)
+                            ? ConstsApp.whitePokeball
+                            : ConstsApp.darkPokeball,
+                      ),
                     ),
                     onPressed: () {
                       _appStore.getCurrentTheme();
