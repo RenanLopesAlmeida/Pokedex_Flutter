@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_pokedex/src/consts/consts_app.dart';
 import 'package:flutter_pokedex/src/stores/app_store.dart';
 import 'package:get_it/get_it.dart';
 
@@ -32,13 +33,13 @@ class _AppBarHomeState extends State<AppBarHome> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                Padding(
+                Container(
                   padding: const EdgeInsets.only(top: 20, right: 6),
                   child: IconButton(
-                    icon: Icon(
+                    icon: Image.asset(
                       (_darkTheme)
-                          ? Icons.lightbulb_outline
-                          : Icons.airline_seat_flat,
+                          ? ConstsApp.whitePokeball
+                          : ConstsApp.darkPokeball,
                     ),
                     onPressed: () {
                       _appStore.getCurrentTheme();
