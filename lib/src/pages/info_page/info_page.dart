@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/pages/info_page/widgets/about_tab.dart';
+import 'package:flutter_pokedex/src/pages/info_page/widgets/evolution_tab.dart';
 import 'package:flutter_pokedex/src/stores/pokeapi_v2_store.dart';
 import '../../stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
@@ -88,8 +89,8 @@ class _AboutPageState extends State<AboutPage>
             pokemonStore: _pokemonStore,
             pokeApiV2Store: _pokeApiV2Store,
           ),
-          Container(
-            color: Colors.deepPurpleAccent,
+          EvolutionTab(
+            pokemonStore: _pokemonStore,
           ),
           Container(
             color: Colors.blue,

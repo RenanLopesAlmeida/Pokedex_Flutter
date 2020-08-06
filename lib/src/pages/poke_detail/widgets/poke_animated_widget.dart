@@ -13,39 +13,41 @@ class PokeAnimatedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        return AnimatedPadding(
-          duration: Duration(milliseconds: 500),
-          curve: Curves.bounceInOut,
-          padding: EdgeInsets.all(
-            (index == pokemonStore.currentPosition) ? 0 : 60,
-          ),
-          child: Hero(
-            tag: (index == pokemonStore.currentPosition)
-                ? pokemonItem.name
-                : 'none' + index.toString(),
-            child: CachedNetworkImage(
-              height: 160,
-              width: 160,
-              color: (index == pokemonStore.currentPosition)
-                  ? null
-                  : Colors.black.withOpacity(0.4),
-              placeholder: (context, url) => Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.grey,
-                  strokeWidth: 1.8,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Colors.deepPurpleAccent,
+    return IgnorePointer(
+      child: Observer(
+        builder: (context) {
+          return AnimatedPadding(
+            duration: Duration(milliseconds: 500),
+            curve: Curves.bounceInOut,
+            padding: EdgeInsets.all(
+              (index == pokemonStore.currentPosition) ? 0 : 60,
+            ),
+            child: Hero(
+              tag: (index == pokemonStore.currentPosition)
+                  ? pokemonItem.name
+                  : 'none' + index.toString(),
+              child: CachedNetworkImage(
+                height: 160,
+                width: 160,
+                color: (index == pokemonStore.currentPosition)
+                    ? null
+                    : Colors.black.withOpacity(0.4),
+                placeholder: (context, url) => Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.grey,
+                    strokeWidth: 1.8,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      Colors.deepPurpleAccent,
+                    ),
                   ),
                 ),
+                imageUrl:
+                    'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${pokemonItem.num}.png',
               ),
-              imageUrl:
-                  'https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/${pokemonItem.num}.png',
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }
