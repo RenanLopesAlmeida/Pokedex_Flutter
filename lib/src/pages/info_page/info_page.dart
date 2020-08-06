@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/pages/info_page/widgets/about_tab.dart';
 import 'package:flutter_pokedex/src/pages/info_page/widgets/evolution_tab.dart';
+import 'package:flutter_pokedex/src/pages/info_page/widgets/status_tab.dart';
 import 'package:flutter_pokedex/src/stores/pokeapi_v2_store.dart';
+import 'package:mobx/mobx.dart';
 import '../../stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:md2_tab_indicator/md2_tab_indicator.dart';
@@ -18,6 +20,7 @@ class _AboutPageState extends State<AboutPage>
   PokeApiStore _pokemonStore;
   PokeApiV2Store _pokeApiV2Store;
   PageController _pageController;
+  ReactionDisposer _disposer;
 
   @override
   void initState() {
@@ -26,6 +29,21 @@ class _AboutPageState extends State<AboutPage>
     _pokemonStore = GetIt.instance<PokeApiStore>();
     _pokeApiV2Store = GetIt.instance<PokeApiV2Store>();
     _pageController = PageController(initialPage: 0);
+
+    _disposer = reaction(
+      (f) => _pokemonStore.currentPokemon,
+      (r) => _pageController.animateToPage(
+        0,
+        duration: Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _disposer();
+    super.dispose();
   }
 
   @override
@@ -92,8 +110,9 @@ class _AboutPageState extends State<AboutPage>
           EvolutionTab(
             pokemonStore: _pokemonStore,
           ),
-          Container(
-            color: Colors.blue,
+          StatusTab(
+            pokemonStore: _pokemonStore,
+            pokeApiV2Store: _pokeApiV2Store,
           ),
         ],
       ),

@@ -19,22 +19,22 @@ class AboutTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            'Description',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Observer(builder: (_) {
-            Specie _specie = pokeApiV2Store.specie;
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Description',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Observer(builder: (_) {
+              Specie _specie = pokeApiV2Store.specie;
 
-            return Container(
-              height: 70,
-              child: SingleChildScrollView(
+              return Container(
+                height: 70,
                 child: _specie != null
                     ? Text(
                         _specie.flavorTextEntries
@@ -49,44 +49,44 @@ class AboutTab extends StatelessWidget {
                     : CircularProgressAbout(
                         color: pokemonStore.currentPokemonColor,
                       ),
-              ),
-            );
-          }),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            'Biology',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Observer(builder: (_) {
-            return Column(
-              children: <Widget>[
-                PokemonBiologyInfo(
-                  biologyTitle: 'Height',
-                  biologyValue: pokemonStore.currentPokemon.height,
-                  titleStyle: Theme.of(context).textTheme.headline4,
-                  valueStyle: Theme.of(context).textTheme.headline3,
-                ),
-                PokemonBiologyInfo(
-                  biologyTitle: 'Weight',
-                  biologyValue: pokemonStore.currentPokemon.weight,
-                  titleStyle: Theme.of(context).textTheme.headline4,
-                  valueStyle: Theme.of(context).textTheme.headline3,
-                ),
-                PokemonBiologyInfo(
-                  biologyTitle: 'Type',
-                  biologyValue: pokemonStore.currentPokemon.type.toString(),
-                  titleStyle: Theme.of(context).textTheme.headline4,
-                  valueStyle: Theme.of(context).textTheme.headline3,
-                ),
-              ],
-            );
-          }),
-        ],
+              );
+            }),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Biology',
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Observer(builder: (_) {
+              return Column(
+                children: <Widget>[
+                  PokemonBiologyInfo(
+                    biologyTitle: 'Height',
+                    biologyValue: pokemonStore.currentPokemon.height,
+                    titleStyle: Theme.of(context).textTheme.headline4,
+                    valueStyle: Theme.of(context).textTheme.headline3,
+                  ),
+                  PokemonBiologyInfo(
+                    biologyTitle: 'Weight',
+                    biologyValue: pokemonStore.currentPokemon.weight,
+                    titleStyle: Theme.of(context).textTheme.headline4,
+                    valueStyle: Theme.of(context).textTheme.headline3,
+                  ),
+                  PokemonBiologyInfo(
+                    biologyTitle: 'Type',
+                    biologyValue: pokemonStore.currentPokemon.type.toString(),
+                    titleStyle: Theme.of(context).textTheme.headline4,
+                    valueStyle: Theme.of(context).textTheme.headline3,
+                  ),
+                ],
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
