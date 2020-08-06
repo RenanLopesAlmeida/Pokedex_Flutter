@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/poke_detail_page.dart';
+import 'package:flutter_pokedex/src/stores/pokeapi_v2_store.dart';
 import './stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import './pages/home_page/home_page.dart';
@@ -7,6 +8,7 @@ import './pages/home_page/home_page.dart';
 void main() {
   GetIt getIt = GetIt.instance;
   getIt.registerSingleton<PokeApiStore>(PokeApiStore());
+  getIt.registerSingleton<PokeApiV2Store>(PokeApiV2Store());
   return runApp(MyApp());
 }
 
@@ -37,11 +39,33 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
+              bodyText1: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+              bodyText2: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 14,
+                color: Colors.black87,
+              ),
               subtitle2: TextStyle(
                 fontFamily: 'Google',
                 fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
+              ),
+              headline4: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: Colors.black54,
+              ),
+              headline3: TextStyle(
+                fontFamily: 'Google',
+                fontSize: 14,
+                color: Colors.black,
               ),
             ),
       ),

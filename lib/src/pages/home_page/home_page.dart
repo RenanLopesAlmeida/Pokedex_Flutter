@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_pokedex/src/consts/consts_api.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -107,7 +106,7 @@ class _HomePageState extends State<HomePage> {
                                           index: index,
                                           types: _pokemon.type,
                                           name: _pokemon.name,
-                                          color: ConstsAPI.getColorType(
+                                          color: ConstsApp.getColorType(
                                               type: _pokemon.type[0]),
                                           num: _pokemon.num,
                                         ),

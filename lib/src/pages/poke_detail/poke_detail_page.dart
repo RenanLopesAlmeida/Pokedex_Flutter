@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_pokedex/src/consts/consts_app.dart';
 import 'package:flutter_pokedex/src/models/pokeapi.dart';
-import 'package:flutter_pokedex/src/pages/about_page/about_page.dart';
+import 'package:flutter_pokedex/src/pages/info_page/info_page.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/poke_animated_widget.dart';
 import 'package:flutter_pokedex/src/pages/poke_detail/widgets/pokeball_animated_rotation.dart';
+import 'package:flutter_pokedex/src/stores/pokeapi_v2_store.dart';
 import '../../stores/pokeapi_store.dart';
 import 'package:get_it/get_it.dart';
 import 'package:simple_animations/simple_animations.dart';
@@ -25,13 +26,17 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
   MultiTrackTween _animation;
 
   double _progress, _multiple, _opacity, _opacityTitleAppBar;
+  PokeApiV2Store _pokeApiV2Store;
 
   @override
   void initState() {
     super.initState();
 
     _pokemonStore = GetIt.instance<PokeApiStore>();
+    _pokeApiV2Store = GetIt.instance<PokeApiV2Store>();
     _pokemon = _pokemonStore.currentPokemon;
+    _pokeApiV2Store.getInfoPokemon(_pokemonStore.currentPokemon.name);
+    _pokeApiV2Store.getInfoSpecie(_pokemonStore.currentPokemon.id);
 
     _animation = MultiTrackTween(
       [
@@ -227,6 +232,10 @@ class _PokeDetailPageState extends State<PokeDetailPage> {
                     itemCount: _pokemonStore.pokeApi.pokemon.length,
                     onPageChanged: (index) {
                       _pokemonStore.setCurrentPokemon(index);
+                      _pokeApiV2Store
+                          .getInfoPokemon(_pokemonStore.currentPokemon.name);
+                      _pokeApiV2Store
+                          .getInfoSpecie(_pokemonStore.currentPokemon.id);
                     },
                     itemBuilder: (context, index) {
                       Pokemon _pokemonItem =
